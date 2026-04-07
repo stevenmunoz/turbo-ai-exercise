@@ -1,0 +1,86 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // Users collection
+    match /users/{userId} {
+      // Allow read for authenticated users (own profile) or admins
+      allow read: if isOwner(userId) || isAdmin();
+
+      // Allow create for new users (registration)
+      allow create: if isAuthenticated();
+
+      // Allow update only for own profile or admins
+      allow update: if isOwner(userId) || isAdmin();
+
+      // Allow delete only for admins
+      allow delete: if isAdmin();
+    }
+
+    // Conversations collection
+    match /conversations/{conversationId} {
+      // Allow read/write only for conversation owner
+      allow read, write: if isAuthenticated() &&
+                           resource.data.user_id == request.auth.uid;
+
+      // Allow create for authenticated users
+      allow create: if isAuthenticated() &&
+                      request.resource.data.user_id == request.auth.uid;
+    }
+
+    // Messages collection
+    match /messages/{messageId} {
+      // Allow read/write only for message owner
+      allow read, write: if isAuthenticated() &&
+                           resource.data.user_id == request.auth.uid;
+
+      // Allow create for authenticated users
+      allow create: if isAuthenticated() &&
+                      request.resource.data.user_id == request.auth.uid;
+    }
+
+    // Agent Executions collection
+    match /agent_executions/{executionId} {
+      // Allow read only for execution owner
+      allow read: if isAuthenticated() &&
+                    resource.data.user_id == request.auth.uid;
+
+      // Allow write through Cloud Functions only
+      allow write: if false;
+    }
+
+    // Documents collection (analyzed documents metadata)
+    match /documents/{documentId} {
+      // Allow read only for document owner
+      allow read: if isAuthenticated() &&
+                    resource.data.user_id == request.auth.uid;
+
+      // Allow create for authenticated users
+      allow create: if isAuthenticated() &&
+                      request.resource.data.user_id == request.auth.uid;
+
+      // Allow write through Cloud Functions only
+      allow update, delete: if false;
+    }
+
+    // Default deny all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

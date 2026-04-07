@@ -1,0 +1,12 @@
+# Cloud Functions Framework
+functions-framework==3.*
+
+# Firebase Admin SDK
+firebase-admin==6.5.0
+
+# Google Cloud
+google-cloud-firestore==2.18.*
+
+# Utilities
+python-dotenv==1.0.0
+pydantic-settings==2.1.0

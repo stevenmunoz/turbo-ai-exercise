@@ -1,0 +1,54 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isValidDocument() {
+      // Allow PDF, images, and text files
+      return request.resource.contentType.matches('application/pdf') ||
+             request.resource.contentType.matches('image/.*') ||
+             request.resource.contentType.matches('text/.*');
+    }
+
+    function isValidSize() {
+      // Max file size: 50MB
+      return request.resource.size <= 50 * 1024 * 1024;
+    }
+
+    // Documents path: documents/{userId}/{fileName}
+    match /documents/{userId}/{fileName} {
+      // Allow read for owner
+      allow read: if isOwner(userId);
+
+      // Allow write for owner with validation
+      allow write: if isOwner(userId) &&
+                     isValidDocument() &&
+                     isValidSize();
+    }
+
+    // User profile images: profiles/{userId}/{fileName}
+    match /profiles/{userId}/{fileName} {
+      // Allow read for owner
+      allow read: if isOwner(userId);
+
+      // Allow write for owner (images only)
+      allow write: if isOwner(userId) &&
+                     request.resource.contentType.matches('image/.*') &&
+                     request.resource.size <= 5 * 1024 * 1024; // 5MB max
+    }
+
+    // Default deny all
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
