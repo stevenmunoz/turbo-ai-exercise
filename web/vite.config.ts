@@ -76,7 +76,7 @@ function spaFallbackPlugin(): Plugin {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: process.env.GITHUB_PAGES === 'true' ? '/trubo-ai-exercise/' : '/',
+  base: process.env.GITHUB_PAGES === 'true' ? '/turbo-ai-exercise/' : '/',
   plugins: [react(), replayLogPlugin(), spaFallbackPlugin()],
   resolve: {
     alias: {
