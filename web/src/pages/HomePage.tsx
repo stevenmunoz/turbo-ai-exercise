@@ -393,7 +393,7 @@ export const HomePage = () => {
       <section style={s.hero}>
         <div style={s.heroInner}>
           <img
-            src="/images/steven-whatsapp-sticker.png"
+            src={`${import.meta.env.BASE_URL}images/steven-whatsapp-sticker.png`}
             alt="Steven"
             style={{
               display: 'block',
@@ -425,7 +425,7 @@ export const HomePage = () => {
         {/* AI-generated hero illustration */}
         <div style={{ textAlign: 'center', marginTop: spacing[10], position: 'relative', zIndex: 1 }}>
           <img
-            src="/images/hero-medflow.png"
+            src={`${import.meta.env.BASE_URL}images/hero-medflow.png`}
             alt="MedFlow dashboard concept"
             style={{
               maxWidth: '420px',

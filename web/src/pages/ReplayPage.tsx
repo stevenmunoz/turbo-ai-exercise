@@ -507,7 +507,7 @@ function CinematicIntro({ onComplete }: { onComplete: () => void }) {
               }} />
               {/* Photo */}
               <img
-                src="/images/steven-sticker.png"
+                src={`${import.meta.env.BASE_URL}images/steven-sticker.png`}
                 alt="Steven"
                 style={{
                   position: 'absolute',
