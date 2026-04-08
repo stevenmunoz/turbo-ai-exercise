@@ -1,4 +1,5 @@
 import { type ReactNode, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { colors, typography, spacing, radii, layout, transitions } from '@/shared/design-tokens';
 import './prototype.css';
 
@@ -181,6 +182,9 @@ export function AppShell({ activeView, onNavigate, children }: AppShellProps) {
             <div style={s.userRole}>Order Specialist</div>
           </div>
         </div>
+
+        <div style={s.divider} />
+        <Link to="/" style={s.backLink}>← Back to Home</Link>
       </aside>
 
       {/* ── Main content ────────────────────────── */}
@@ -309,6 +313,17 @@ const s: Record<string, React.CSSProperties> = {
     fontSize: '10px',
     color: colors.neutral[500],
     letterSpacing: typography.letterSpacing.wide,
+  },
+
+  backLink: {
+    display: 'block',
+    fontSize: typography.fontSize.sm,
+    color: colors.primary[300],
+    textDecoration: 'none',
+    padding: `${spacing[2]} ${spacing[3]}`,
+    borderRadius: radii.sm,
+    transition: `all ${transitions.fast}`,
+    fontFamily: typography.fontFamily.body,
   },
 
   // Main

@@ -2,8 +2,6 @@ import { useState, useCallback } from 'react';
 import { AppShell } from '../prototype/AppShell';
 import { DashboardView } from '../prototype/DashboardView';
 import { NewOrderView } from '../prototype/NewOrderView';
-import { TopNav } from '../shared/TopNav';
-
 type View = 'dashboard' | 'new-order' | 'orders' | 'products' | 'fee-schedules' | 'vendors';
 
 export function PrototypePage() {
@@ -34,7 +32,6 @@ export function PrototypePage() {
 
   return (
     <>
-      <TopNav />
       <AppShell activeView={activeView} onNavigate={handleNavigate}>
         {activeView === 'dashboard' && (
           <DashboardView onNewOrder={handleNewOrder} onViewOrder={handleViewOrder} />
