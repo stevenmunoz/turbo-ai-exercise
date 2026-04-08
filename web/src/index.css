@@ -1,3 +1,13 @@
+/* ── Text selection (site-wide) ─────────────── */
+::selection {
+  background: #4F6AE8;
+  color: #FFFFFF;
+}
+::-moz-selection {
+  background: #4F6AE8;
+  color: #FFFFFF;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

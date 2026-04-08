@@ -1,0 +1,225 @@
+[
+  {
+    "id": "airbnb",
+    "name": "Airbnb",
+    "description": "Clean, minimal marketplace UI with generous whitespace, rounded corners, and a warm color palette. Known for its card-based layouts, intuitive search, and multi-step flows that reduce cognitive load.",
+    "designSystem": {
+      "colors": {
+        "primary": "#FF385C (Rausch red)",
+        "background": "#FFFFFF",
+        "text": "#222222",
+        "secondary": "#717171",
+        "border": "#DDDDDD",
+        "success": "#008A05"
+      },
+      "typography": "Cereal (custom), clean sans-serif, bold hierarchy — large titles, medium labels, regular body",
+      "spacing": "Generous whitespace, 16-24px padding in cards, 48-64px section spacing",
+      "patterns": [
+        "Card grid with image, title, price, rating — consistent aspect ratios",
+        "Floating search bar with segmented inputs (Where, When, Who)",
+        "Centered modals with icon + title + description + CTA pattern",
+        "Multi-step checkout with numbered accordion sections and sticky summary sidebar",
+        "Pill-shaped CTAs with high contrast (black fill, white text)",
+        "Subtle badges (Guest favorite) with soft backgrounds",
+        "Price breakdown with expandable details"
+      ],
+      "keyTakeaways": [
+        "Whitespace is a feature, not wasted space — every element breathes",
+        "Multi-step forms shown as collapsed accordion, not a wizard — user sees the full journey upfront",
+        "Sticky sidebar summary during checkout keeps context visible while filling forms",
+        "Modals are centered, simple, and single-purpose — one message, one CTA"
+      ]
+    },
+    "screenshots": [
+      {
+        "filename": "CleanShot 2026-04-07 at 18.00.38@2x.png",
+        "description": "Airbnb homepage with card grid, floating search bar, and centered pricing modal. Shows the clean card layout with image thumbnails, pricing, ratings, and 'Guest favorite' badges."
+      },
+      {
+        "filename": "CleanShot 2026-04-07 at 18.00.46@2x.png",
+        "description": "Airbnb homepage without modal overlay. Full card grid visible with horizontal scroll rows grouped by location (Medellín, Cartagena, Santa Marta). Segmented top navigation (Homes, Experiences, Services)."
+      },
+      {
+        "filename": "CleanShot 2026-04-07 at 18.01.10@2x.png",
+        "description": "Airbnb referral modal — 'How it works' with 3 icon+text steps and a single black CTA button. Shows the centered modal pattern with generous padding and clear visual hierarchy."
+      },
+      {
+        "filename": "CleanShot 2026-04-07 at 18.01.36@2x.png",
+        "description": "Airbnb 'Confirm and pay' checkout flow. Left side: numbered accordion steps (1. Log in, 2. Payment, 3. Review). Right side: sticky booking summary with property image, dates, guests, price breakdown, and 'Price is below average' nudge."
+      }
+    ]
+  },
+  {
+    "id": "hourglass-healthcare",
+    "name": "Hourglass — Modern Healthcare Dashboard",
+    "description": "A modern healthcare dashboard concept by Paperpillar (Dribbble). Breaks away from typical clinical aesthetics with a soft glassmorphic UI, gradient backgrounds, and a widget-based layout. Demonstrates that healthcare tools can feel warm, approachable, and beautiful without sacrificing information density.",
+    "designSystem": {
+      "colors": {
+        "primary": "#2D4A7A (deep navy)",
+        "accent": "#4A7A5C (muted sage green)",
+        "background": "#F0EAF5 (soft lavender gradient)",
+        "surface": "#FFFFFF (glassmorphic, semi-transparent)",
+        "text": "#1A1A2E (near-black)",
+        "secondary": "#6B7280 (cool gray)",
+        "highlight": "#E8F5E9 (soft green for active states)"
+      },
+      "typography": "Clean sans-serif (likely Inter or similar), large 'Welcome' heading, medium weight for section titles, regular for body text. Doctor name in bold serif-like weight for warmth.",
+      "spacing": "Widget-based grid with 16-20px gaps. Cards have 16-24px internal padding. Generous section spacing with clear visual grouping.",
+      "patterns": [
+        "Left sidebar navigation with icon + label, active state highlighted with filled background",
+        "Hero card with doctor photo, appointment details, and quick-action icons below",
+        "Widget grid layout — independent cards for different functions (Find Doctor, Health Tips, Results, Queue)",
+        "Icon grid for doctor specialties — circular icon buttons in a clean grid with labels",
+        "Appointment queue widget with dropdown selector and compact table (queue, urgent, ETA)",
+        "Health tips as horizontal card list with illustration + title + description",
+        "Result & History as a compact timeline/list with date markers",
+        "Quick-action icon bar (Pharmacy, My Queue, Book, Doctors, Schedule) with circular icons",
+        "Glassmorphic card surfaces with subtle blur and semi-transparent backgrounds"
+      ],
+      "keyTakeaways": [
+        "Healthcare doesn't have to look clinical — soft gradients and rounded corners make it approachable",
+        "Widget-based dashboard lets each section be independent and scannable at a glance",
+        "The doctor specialty icon grid is a great pattern for product category selection — we can adapt this for medical supply categories",
+        "Appointment queue widget maps directly to our order queue — compact table with status indicators",
+        "Quick-action icon bar reduces the need for deep navigation — most common tasks are one click away"
+      ]
+    },
+    "screenshots": [
+      {
+        "filename": "CleanShot 2026-04-07 at 18.02.50@2x.png",
+        "description": "Hourglass healthcare dashboard by Paperpillar. Full dashboard view showing: left sidebar nav (Dashboard, Appointments, Messages, Pharmacy, Laboratory, Inpatient, Support, Settings), hero card with Dr. Haylie Philips and appointment details, 'Find a doctor' specialty icon grid (General, Pediatrics, Gynecology, Internal Medicine, Dermatology, Mental Health, Cardiology, Orthopedics, Infectious Disease), quick-action icon bar, Health Tips cards, Result & History list, and Appointment Queue widget with Dr. James Carter."
+      }
+    ]
+  },
+  {
+    "id": "pills-ecommerce",
+    "name": "Pills — Medical Supply E-Commerce",
+    "description": "A medical supply e-commerce concept with clean product categorization, pill-shaped filter chips, and a warm, approachable aesthetic. Demonstrates how to organize medical products into browsable categories with clear pricing and hover-to-preview interactions.",
+    "designSystem": {
+      "colors": {
+        "primary": "#1A1A1A (near-black for text and CTAs)",
+        "background": "#F5F0EB (warm off-white / light beige)",
+        "surface": "#FFFFFF",
+        "accent": "#C8D8C4 (soft sage green for category cards)",
+        "secondary": "#D4C5B0 (warm tan for alternate cards)",
+        "text": "#1A1A1A",
+        "muted": "#666666"
+      },
+      "typography": "Serif headings (elegant, medical feel) paired with clean sans-serif body text. Large hero text, medium category labels, small product details.",
+      "spacing": "Generous whitespace throughout. Large hero section with floating product images. Card grid with 16-20px gaps. Category pills with comfortable padding.",
+      "patterns": [
+        "Hero section with floating product images on sky-blue background — aspirational, not clinical",
+        "Three main category cards (Prescription medicine, Surgical product, Supplements & vitamins) with large images and descriptive subtitles",
+        "Pill-shaped category filter chips with icons (Diabetes Care, Vitamins & Supplements, Pain Relief, Allergy, Skin Care, Mental Wellness, Bone & Joint)",
+        "Product card grid with image, name, price, and quantity selector",
+        "Special offers carousel with horizontal scroll and hover-to-expand product detail popup",
+        "Hover popup showing product image, name, price, and 'Shop Now' CTA — progressive disclosure",
+        "Expandable accordion sections for offer categories (Immunity Sale, Vitamins Offers, Skin Deals)",
+        "Top navigation with Home, Request Order, Special Offer, Search, Account, Cart"
+      ],
+      "keyTakeaways": [
+        "Category pill chips with icons are perfect for product type filtering in our order form — adapt for HCPCS categories or product lines",
+        "The three main category cards pattern maps directly to our product types (compression garments, surgical supplies, etc.)",
+        "Hover-to-preview on product cards reduces clicks — useful for showing product details while selecting items in the order form",
+        "Warm beige/sage palette proves medical supply tools don't need to be sterile blue — approachable design builds trust",
+        "'Request Order' as a top-level nav item is exactly our primary use case"
+      ]
+    },
+    "screenshots": [
+      {
+        "filename": "CleanShot 2026-04-07 at 18.04.39@2x.png",
+        "description": "Pills full-page overview showing hero section with floating product bottles, three category cards (Prescription medicine, Surgical product, Supplements & vitamins), pill-shaped category chips with icons, product card grid with pricing, special offers section with hover product preview, and social/CTA footer."
+      },
+      {
+        "filename": "CleanShot 2026-04-07 at 18.05.00@2x.png",
+        "description": "Pills special offers page showing horizontal product carousel with hover popup (product image, MedRelief name, $28.88 price, 'Shop Now' CTA), expandable accordion offer categories (Immunity Sale, Vitamins Offers, Skin Deals), and help contact info."
+      }
+    ]
+  },
+  {
+    "id": "dentexa-dashboard",
+    "name": "Dentexa — Clinical Operations Dashboard",
+    "description": "A dental clinic management dashboard with comprehensive financial and operational metrics. Features a well-organized left sidebar with grouped navigation sections, revenue/expense visualizations, patient data, popular treatments, and inventory management with low-stock alerts.",
+    "designSystem": {
+      "colors": {
+        "primary": "#2563EB (bright blue)",
+        "background": "#F0F4FF (soft blue-tinted white)",
+        "surface": "#FFFFFF",
+        "text": "#1A1A2E (dark navy)",
+        "secondary": "#6B7280 (gray)",
+        "success": "#10B981 (green for positive metrics)",
+        "accent": "#8B5CF6 (purple for chart accents)",
+        "warning": "#F59E0B (amber for low stock)"
+      },
+      "typography": "Clean sans-serif (Inter-like). Large bold numbers for KPIs ($487,650). Medium weight for section headers. Regular for labels and data.",
+      "spacing": "Widget-based grid with 16-20px gaps between cards. Cards have 20-24px internal padding. Sidebar has clear section grouping with dividers.",
+      "patterns": [
+        "Left sidebar with grouped nav sections: Clinic (Dashboard, Appointment, Patients, Treatments, Staff list), Finance (Accounts, Sales, Purchases, Payment Method), Physical Asset (Stocks, Peripherals), plus Report and Customer Support",
+        "Revenue line chart with 12-month view, total cash KPI ($487,650 ↑ 18.3%), and tooltip showing monthly detail",
+        "Expenses donut chart with category breakdown (Staff Salaries 42%, Medical Supplies 25%, Facility Rent 15%, Equipment M. 11%, Marketing 5%, Utilities 2%)",
+        "Financial Overview bar chart with monthly income vs. costs comparison",
+        "Patient Data widget with first-time vs. follow-up visit split (156/164, 48.75%/51.25%)",
+        "Popular Treatments list with star ratings (Health Screening 4.8, Consultation 4.5, Vaccination 4.9)",
+        "Inventory Status with total value ($284,900), total items (1,547 units), stacked status bar (Available/Low Stock/Out of Stock), and Low Stock alert table with item, quantity, and Order action button"
+      ],
+      "keyTakeaways": [
+        "Grouped sidebar navigation (Clinic/Finance/Physical Asset) is perfect for our tool — we can group by Orders, Billing, Products, Admin",
+        "Inventory Status with low-stock alerts maps directly to our product catalog management needs",
+        "Revenue vs. Expenses visualization pattern works for our margin/cost analysis views",
+        "Patient data split (first-time vs. follow-up) can adapt to new orders vs. reorders",
+        "The dashboard density is right — comprehensive without being overwhelming. Good balance for our order management overview."
+      ]
+    },
+    "screenshots": [
+      {
+        "filename": "CleanShot 2026-04-07 at 18.05.59@2x.png",
+        "description": "Dentexa full dashboard view. Left sidebar with grouped navigation (Clinic: Dashboard/Appointment/Patients/Treatments/Staff list, Finance: Accounts/Sales/Purchases/Payment Method, Physical Asset: Stocks/Peripherals, plus Report/Customer Support). Main area shows: Revenue line chart ($487,650 total, 12-month view), Expenses donut chart ($256,320 with category breakdown), Financial Overview bar chart, Patient Data (156/164 visits), Popular Treatments with ratings, and Inventory Status with low stock alerts (Surgical Masks, Latex Gloves)."
+      }
+    ]
+  },
+  {
+    "id": "xenityhealth-dashboard",
+    "name": "Xenityhealth — Healthcare Analytics Dashboard",
+    "description": "A modern healthcare analytics dashboard with prominent KPI cards, revenue trends, diagnosis distribution, and daily schedule timeline. Clean white design with blue/orange accent colors. Two layout variants show slightly different spacing and scroll behaviors.",
+    "designSystem": {
+      "colors": {
+        "primary": "#3B5BDB (medium blue)",
+        "accent": "#FF6B35 (warm orange for highlights and alerts)",
+        "background": "#F8F9FA (light gray)",
+        "surface": "#FFFFFF",
+        "text": "#1A1A2E (dark navy)",
+        "secondary": "#6B7280 (gray for labels)",
+        "success": "#22C55E (green for positive trends)",
+        "danger": "#EF4444 (red for critical alerts)"
+      },
+      "typography": "Clean sans-serif. Extra-large bold numbers for KPI cards (6025, 4152, 5948, 5626). Medium weight for section titles. Sparkline micro-charts inline with KPI values.",
+      "spacing": "4-column KPI card row at top. 2-column layout below (wide chart left, narrow widget right). Cards with 20-24px padding. 16px gaps between widgets.",
+      "patterns": [
+        "Top KPI card row with 4 metric cards: each has icon, label, large number, sparkline trend, and percentage change badge (green ↑ or red ↓)",
+        "Revenue overview area chart with time period toggle (1 Year / 6 Months / 2 Months / 1 Month) and monthly tooltip ($47,500)",
+        "Avg Diagnose donut chart with total patient count center (640) and category breakdown (Neurology 120, Oncology 50, Urology 24)",
+        "Tab navigation within dashboard (Overview, Medical Reports, Patients Overview, Diagnose)",
+        "Today's Schedule horizontal timeline with avatar + appointment type cards placed at time slots",
+        "Latest Visits list with patient avatar, name, specialty, date, and time — compact row format",
+        "Left sidebar navigation with icons + labels (Dashboard, Patient, Message with notification badge, Appointment, Medical Record, Analytics, Billing, Settings)"
+      ],
+      "keyTakeaways": [
+        "KPI cards with sparkline trends are excellent for our order overview — adapt for: Active Orders, Pending Approvals, Revenue This Month, Orders Shipped",
+        "Tab navigation within the dashboard page keeps related views accessible without deep navigation — useful for Orders/Billing/Products views",
+        "The schedule timeline pattern can be adapted for order processing timeline or shipment tracking",
+        "Orange accent for alerts/critical items creates clear visual priority without red-alarm fatigue",
+        "Latest Visits list pattern maps perfectly to our recent orders list with patient, product, status, and date"
+      ]
+    },
+    "screenshots": [
+      {
+        "filename": "CleanShot 2026-04-07 at 18.06.19@2x.png",
+        "description": "Xenityhealth dashboard variant 1. Left sidebar nav (Dashboard, Patient, Message with red badge, Appointment, Medical Record, Analytics, Billing, Settings). Top KPI row: Patients 6025 (↑68.95%), New This Week 4152 (↑471%), Critical Alerts 5948 (↓42.06%), Appointments 5626 (↑27.41%). Revenue overview area chart ($138,500 avg/month), Avg Diagnose donut (640 total), Today's Schedule timeline, Latest Visits list."
+      },
+      {
+        "filename": "CleanShot 2026-04-07 at 18.06.28@2x.png",
+        "description": "Xenityhealth dashboard variant 2 — same layout with slightly different scroll position showing more of the Latest Visits list (Esther Howard, Eleanor Pena, Brooklyn Simmons, Cameron Williamson). Demonstrates the full-height sidebar and consistent card spacing across the dashboard."
+      }
+    ]
+  }
+]
