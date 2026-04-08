@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   colors,
   typography,
@@ -8,7 +9,6 @@ import {
   transitions,
   layout,
 } from '../shared/design-tokens';
-import { TopNav } from '../shared/TopNav';
 
 // ─── Google Fonts ─────────────────────────────────────────────
 const fontLink = document.createElement('link');
@@ -180,9 +180,7 @@ export function DesignSystemPage() {
   const [sampleChecked, setSampleChecked] = useState(true);
 
   return (
-    <>
-      <TopNav />
-      <div style={s.page}>
+    <div style={s.page}>
       {/* ── Sidebar TOC ───────────────────────────── */}
       <nav style={s.toc}>
         <div style={s.tocBrand}>
@@ -211,6 +209,9 @@ export function DesignSystemPage() {
             {label}
           </a>
         ))}
+        <div style={{ flex: 1 }} />
+        <div style={s.tocDivider} />
+        <Link to="/" style={s.tocBackLink}>← Back to Home</Link>
       </nav>
 
       {/* ── Main content ──────────────────────────── */}
@@ -1138,7 +1139,6 @@ export function DesignSystemPage() {
         </footer>
       </main>
     </div>
-    </>
   );
 }
 
@@ -1160,7 +1160,7 @@ const s: Record<string, React.CSSProperties> = {
     flexShrink: 0,
     position: 'sticky' as const,
     top: 0,
-    height: 'calc(100vh - 52px)',
+    height: '100vh',
     overflowY: 'auto' as const,
     backgroundColor: colors.neutral[900],
     padding: `${spacing[5]} ${spacing[4]}`,
@@ -1209,6 +1209,17 @@ const s: Record<string, React.CSSProperties> = {
     color: colors.neutral[400],
     textDecoration: 'none',
     padding: `${spacing[1]} ${spacing[2]}`,
+    borderRadius: radii.sm,
+    transition: `all ${transitions.fast}`,
+    lineHeight: typography.lineHeight.normal,
+  },
+
+  tocBackLink: {
+    display: 'block',
+    fontSize: typography.fontSize.sm,
+    color: colors.primary[300],
+    textDecoration: 'none',
+    padding: `${spacing[2]} ${spacing[2]}`,
     borderRadius: radii.sm,
     transition: `all ${transitions.fast}`,
     lineHeight: typography.lineHeight.normal,
