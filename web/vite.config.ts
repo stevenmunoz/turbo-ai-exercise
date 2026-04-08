@@ -31,20 +31,30 @@ function contextDataPlugin(): Plugin {
         if (!req.url) return next();
 
         // Check exact file matches (replay log, design library)
+        // Try .context/ first, then public/ as fallback
         const mapped = fileMap[req.url];
-        if (mapped && fs.existsSync(mapped.contextFile)) {
-          _res.setHeader('Content-Type', mapped.contentType);
-          _res.end(fs.readFileSync(mapped.contextFile, 'utf-8'));
-          return;
+        if (mapped) {
+          const publicFallback = path.join(__dirname, 'public', req.url);
+          const source = fs.existsSync(mapped.contextFile) ? mapped.contextFile :
+                         fs.existsSync(publicFallback) ? publicFallback : null;
+          if (source) {
+            _res.setHeader('Content-Type', mapped.contentType);
+            _res.end(fs.readFileSync(source, 'utf-8'));
+            return;
+          }
         }
 
-        // Check attachment files
+        // Check attachment files: try .context/ first, then public/data/
         const attachPrefix = '/data/attachments/';
         if (req.url.startsWith(attachPrefix)) {
           const filename = decodeURIComponent(req.url.slice(attachPrefix.length));
-          const filePath = path.join(contextDir, 'attachments', filename);
-          if (fs.existsSync(filePath)) {
-            const ext = path.extname(filePath).toLowerCase();
+          const candidates = [
+            path.join(contextDir, 'attachments', filename),
+            path.join(__dirname, 'public', 'data', 'attachments', filename),
+          ];
+          const found = candidates.find((p) => fs.existsSync(p));
+          if (found) {
+            const ext = path.extname(found).toLowerCase();
             const mimeTypes: Record<string, string> = {
               '.png': 'image/png',
               '.jpg': 'image/jpeg',
@@ -53,8 +63,8 @@ function contextDataPlugin(): Plugin {
               '.webp': 'image/webp',
             };
             _res.setHeader('Content-Type', mimeTypes[ext] || 'application/octet-stream');
-            _res.setHeader('Content-Length', fs.statSync(filePath).size);
-            fs.createReadStream(filePath).pipe(_res);
+            _res.setHeader('Content-Length', fs.statSync(found).size);
+            fs.createReadStream(found).pipe(_res);
             return;
           }
         }
