@@ -180,8 +180,9 @@ export function DesignSystemPage() {
   const [sampleChecked, setSampleChecked] = useState(true);
 
   return (
-    <div style={s.page}>
+    <>
       <TopNav />
+      <div style={s.page}>
       {/* ── Sidebar TOC ───────────────────────────── */}
       <nav style={s.toc}>
         <div style={s.tocBrand}>
@@ -1137,6 +1138,7 @@ export function DesignSystemPage() {
         </footer>
       </main>
     </div>
+    </>
   );
 }
 
@@ -1158,7 +1160,7 @@ const s: Record<string, React.CSSProperties> = {
     flexShrink: 0,
     position: 'sticky' as const,
     top: 0,
-    height: '100vh',
+    height: 'calc(100vh - 52px)',
     overflowY: 'auto' as const,
     backgroundColor: colors.neutral[900],
     padding: `${spacing[5]} ${spacing[4]}`,
