@@ -28,12 +28,14 @@ function replayLogPlugin(): Plugin {
         }
       });
 
-      server.middlewares.use('/data/attachments', (req, res, next) => {
-        const filename = decodeURIComponent((req.url || '').replace(/^\//, ''));
-        const filePath = path.resolve(__dirname, '../.context/attachments', filename);
-        try {
-          const stat = fs.statSync(filePath);
-          const ext = path.extname(filePath).toLowerCase();
+      server.middlewares.use((req, res, next) => {
+        const prefix = '/data/attachments/';
+        if (!req.url || !req.url.startsWith(prefix)) return next();
+        const filename = decodeURIComponent(req.url.slice(prefix.length));
+        const contextPath = path.resolve(__dirname, '../.context/attachments', filename);
+        if (fs.existsSync(contextPath)) {
+          const stat = fs.statSync(contextPath);
+          const ext = path.extname(contextPath).toLowerCase();
           const mimeTypes: Record<string, string> = {
             '.png': 'image/png',
             '.jpg': 'image/jpeg',
@@ -43,8 +45,8 @@ function replayLogPlugin(): Plugin {
           };
           res.setHeader('Content-Type', mimeTypes[ext] || 'application/octet-stream');
           res.setHeader('Content-Length', stat.size);
-          fs.createReadStream(filePath).pipe(res);
-        } catch {
+          fs.createReadStream(contextPath).pipe(res);
+        } else {
           next();
         }
       });
