@@ -3,52 +3,63 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import fs from 'fs';
 
-function replayLogPlugin(): Plugin {
+/**
+ * Dev-only plugin: serves data from ../.context/ when available.
+ * Falls through to Vite's static file server (public/) when not.
+ *
+ * Uses a single global middleware to avoid Connect's path-mounted
+ * URL stripping, which breaks fallthrough to public/ static files.
+ */
+function contextDataPlugin(): Plugin {
+  const contextDir = path.resolve(__dirname, '../.context');
+
+  const fileMap: Record<string, { contextFile: string; contentType: string }> = {
+    '/data/replay-log.md': {
+      contextFile: path.join(contextDir, 'exercise-action-log.md'),
+      contentType: 'text/plain',
+    },
+    '/data/design-library.json': {
+      contextFile: path.join(contextDir, 'design-library.json'),
+      contentType: 'application/json',
+    },
+  };
+
   return {
-    name: 'serve-replay-log',
+    name: 'context-data',
     configureServer(server) {
-      // Serve from .context/ if available, otherwise fall through to public/data/
-      server.middlewares.use('/data/replay-log.md', (_req, res, next) => {
-        const logPath = path.resolve(__dirname, '../.context/exercise-action-log.md');
-        if (fs.existsSync(logPath)) {
-          res.setHeader('Content-Type', 'text/plain');
-          res.end(fs.readFileSync(logPath, 'utf-8'));
-        } else {
-          next();
-        }
-      });
+      server.middlewares.use((req, _res, next) => {
+        if (!req.url) return next();
 
-      server.middlewares.use('/data/design-library.json', (_req, res, next) => {
-        const libPath = path.resolve(__dirname, '../.context/design-library.json');
-        if (fs.existsSync(libPath)) {
-          res.setHeader('Content-Type', 'application/json');
-          res.end(fs.readFileSync(libPath, 'utf-8'));
-        } else {
-          next();
+        // Check exact file matches (replay log, design library)
+        const mapped = fileMap[req.url];
+        if (mapped && fs.existsSync(mapped.contextFile)) {
+          _res.setHeader('Content-Type', mapped.contentType);
+          _res.end(fs.readFileSync(mapped.contextFile, 'utf-8'));
+          return;
         }
-      });
 
-      server.middlewares.use((req, res, next) => {
-        const prefix = '/data/attachments/';
-        if (!req.url || !req.url.startsWith(prefix)) return next();
-        const filename = decodeURIComponent(req.url.slice(prefix.length));
-        const contextPath = path.resolve(__dirname, '../.context/attachments', filename);
-        if (fs.existsSync(contextPath)) {
-          const stat = fs.statSync(contextPath);
-          const ext = path.extname(contextPath).toLowerCase();
-          const mimeTypes: Record<string, string> = {
-            '.png': 'image/png',
-            '.jpg': 'image/jpeg',
-            '.jpeg': 'image/jpeg',
-            '.gif': 'image/gif',
-            '.webp': 'image/webp',
-          };
-          res.setHeader('Content-Type', mimeTypes[ext] || 'application/octet-stream');
-          res.setHeader('Content-Length', stat.size);
-          fs.createReadStream(contextPath).pipe(res);
-        } else {
-          next();
+        // Check attachment files
+        const attachPrefix = '/data/attachments/';
+        if (req.url.startsWith(attachPrefix)) {
+          const filename = decodeURIComponent(req.url.slice(attachPrefix.length));
+          const filePath = path.join(contextDir, 'attachments', filename);
+          if (fs.existsSync(filePath)) {
+            const ext = path.extname(filePath).toLowerCase();
+            const mimeTypes: Record<string, string> = {
+              '.png': 'image/png',
+              '.jpg': 'image/jpeg',
+              '.jpeg': 'image/jpeg',
+              '.gif': 'image/gif',
+              '.webp': 'image/webp',
+            };
+            _res.setHeader('Content-Type', mimeTypes[ext] || 'application/octet-stream');
+            _res.setHeader('Content-Length', fs.statSync(filePath).size);
+            fs.createReadStream(filePath).pipe(_res);
+            return;
+          }
         }
+
+        next();
       });
     },
   };
@@ -72,7 +83,7 @@ function spaFallbackPlugin(): Plugin {
 // https://vitejs.dev/config/
 export default defineConfig({
   base: process.env.GITHUB_PAGES === 'true' ? '/turbo-ai-exercise/' : '/',
-  plugins: [react(), replayLogPlugin(), spaFallbackPlugin()],
+  plugins: [react(), contextDataPlugin(), spaFallbackPlugin()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
