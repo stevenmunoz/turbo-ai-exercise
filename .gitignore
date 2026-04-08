@@ -350,7 +350,9 @@ site/
 
 # ========== Conductor ==========
 .conductor-workspace
-.context/
+# Ignore conductor scratch files but keep exercise data
+.context/notes.md
+.context/todos.md
 
 # ========== Misc ==========
 # Local configuration overrides
