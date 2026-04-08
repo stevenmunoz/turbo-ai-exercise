@@ -7,6 +7,7 @@ import {
   shadows,
   transitions,
 } from '@/shared/design-tokens';
+import { TopNav } from '@/shared/TopNav';
 
 interface Screenshot {
   filename: string;
@@ -841,6 +842,7 @@ export function ReplayPage() {
 
   return (
     <div style={st.page}>
+      <TopNav />
       {/* Header */}
       <header style={st.header}>
         <div style={st.headerBadge}>Exercise Replay</div>

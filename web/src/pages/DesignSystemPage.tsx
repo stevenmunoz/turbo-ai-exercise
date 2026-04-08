@@ -8,6 +8,7 @@ import {
   transitions,
   layout,
 } from '../shared/design-tokens';
+import { TopNav } from '../shared/TopNav';
 
 // ─── Google Fonts ─────────────────────────────────────────────
 const fontLink = document.createElement('link');
@@ -180,6 +181,7 @@ export function DesignSystemPage() {
 
   return (
     <div style={s.page}>
+      <TopNav />
       {/* ── Sidebar TOC ───────────────────────────── */}
       <nav style={s.toc}>
         <div style={s.tocBrand}>

@@ -7,6 +7,7 @@ import {
   shadows,
   transitions,
 } from '@/shared/design-tokens';
+import { TopNav } from '@/shared/TopNav';
 
 interface Screenshot {
   filename: string;
@@ -248,6 +249,7 @@ export function LibraryPage() {
   if (loading) {
     return (
       <div style={st.page}>
+        <TopNav />
         <div style={st.loading}>Loading design library...</div>
       </div>
     );
@@ -255,6 +257,7 @@ export function LibraryPage() {
 
   return (
     <div style={st.page}>
+      <TopNav />
       <header style={st.header}>
         <div style={st.headerBadge}>Reference Collection</div>
         <h1 style={st.title}>Design Library</h1>
