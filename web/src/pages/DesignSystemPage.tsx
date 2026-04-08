@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   colors,
   typography,
@@ -208,6 +209,9 @@ export function DesignSystemPage() {
             {label}
           </a>
         ))}
+        <div style={{ flex: 1 }} />
+        <div style={s.tocDivider} />
+        <Link to="/" style={s.tocBackLink}>← Back to Home</Link>
       </nav>
 
       {/* ── Main content ──────────────────────────── */}
@@ -1205,6 +1209,17 @@ const s: Record<string, React.CSSProperties> = {
     color: colors.neutral[400],
     textDecoration: 'none',
     padding: `${spacing[1]} ${spacing[2]}`,
+    borderRadius: radii.sm,
+    transition: `all ${transitions.fast}`,
+    lineHeight: typography.lineHeight.normal,
+  },
+
+  tocBackLink: {
+    display: 'block',
+    fontSize: typography.fontSize.sm,
+    color: colors.primary[300],
+    textDecoration: 'none',
+    padding: `${spacing[2]} ${spacing[2]}`,
     borderRadius: radii.sm,
     transition: `all ${transitions.fast}`,
     lineHeight: typography.lineHeight.normal,

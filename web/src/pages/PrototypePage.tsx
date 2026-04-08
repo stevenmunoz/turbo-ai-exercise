@@ -2,7 +2,6 @@ import { useState, useCallback } from 'react';
 import { AppShell } from '../prototype/AppShell';
 import { DashboardView } from '../prototype/DashboardView';
 import { NewOrderView } from '../prototype/NewOrderView';
-
 type View = 'dashboard' | 'new-order' | 'orders' | 'products' | 'fee-schedules' | 'vendors';
 
 export function PrototypePage() {

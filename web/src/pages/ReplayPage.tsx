@@ -7,6 +7,7 @@ import {
   shadows,
   transitions,
 } from '@/shared/design-tokens';
+import { TopNav } from '@/shared/TopNav';
 
 interface Screenshot {
   filename: string;
@@ -507,7 +508,7 @@ function CinematicIntro({ onComplete }: { onComplete: () => void }) {
               }} />
               {/* Photo */}
               <img
-                src="/images/steven-sticker.png"
+                src={`${import.meta.env.BASE_URL}images/steven-sticker.png`}
                 alt="Steven"
                 style={{
                   position: 'absolute',
@@ -841,6 +842,7 @@ export function ReplayPage() {
 
   return (
     <div style={st.page}>
+      <TopNav />
       {/* Header */}
       <header style={st.header}>
         <div style={st.headerBadge}>Exercise Replay</div>
