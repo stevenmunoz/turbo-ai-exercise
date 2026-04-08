@@ -7,34 +7,28 @@ function replayLogPlugin(): Plugin {
   return {
     name: 'serve-replay-log',
     configureServer(server) {
-      // Serve the action log markdown
-      server.middlewares.use('/data/replay-log.md', (_req, res) => {
+      // Serve from .context/ if available, otherwise fall through to public/data/
+      server.middlewares.use('/data/replay-log.md', (_req, res, next) => {
         const logPath = path.resolve(__dirname, '../.context/exercise-action-log.md');
-        try {
-          const content = fs.readFileSync(logPath, 'utf-8');
+        if (fs.existsSync(logPath)) {
           res.setHeader('Content-Type', 'text/plain');
-          res.end(content);
-        } catch {
-          res.statusCode = 404;
-          res.end('Log file not found');
+          res.end(fs.readFileSync(logPath, 'utf-8'));
+        } else {
+          next();
         }
       });
 
-      // Serve design library JSON
-      server.middlewares.use('/data/design-library.json', (_req, res) => {
+      server.middlewares.use('/data/design-library.json', (_req, res, next) => {
         const libPath = path.resolve(__dirname, '../.context/design-library.json');
-        try {
-          const content = fs.readFileSync(libPath, 'utf-8');
+        if (fs.existsSync(libPath)) {
           res.setHeader('Content-Type', 'application/json');
-          res.end(content);
-        } catch {
-          res.setHeader('Content-Type', 'application/json');
-          res.end('[]');
+          res.end(fs.readFileSync(libPath, 'utf-8'));
+        } else {
+          next();
         }
       });
 
-      // Serve screenshot attachments
-      server.middlewares.use('/data/attachments', (req, res) => {
+      server.middlewares.use('/data/attachments', (req, res, next) => {
         const filename = decodeURIComponent((req.url || '').replace(/^\//, ''));
         const filePath = path.resolve(__dirname, '../.context/attachments', filename);
         try {
@@ -51,8 +45,7 @@ function replayLogPlugin(): Plugin {
           res.setHeader('Content-Length', stat.size);
           fs.createReadStream(filePath).pipe(res);
         } catch {
-          res.statusCode = 404;
-          res.end('File not found');
+          next();
         }
       });
     },
